@@ -1,0 +1,119 @@
+<Window x:Class="ZeroExLight.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:ZeroExLight" Title="ZERO EX · 灯光控制">
+  <Grid x:Name="Root" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <TabView x:Name="Pages" IsAddTabButtonVisible="False" CanDragTabs="False" CanReorderTabs="False" TabWidthMode="Equal" SelectedIndex="0" Margin="12,12,12,0" AutomationProperties.Name="功能页签">
+      <TabViewItem Header="灯光控制" IsClosable="False">
+        <ScrollViewer x:Name="LightingScroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+          <StackPanel x:Name="LightingContent" Padding="28,24,28,28" Spacing="24">
+      <StackPanel Spacing="6">
+        <TextBlock Text="鼠标灯光" Style="{ThemeResource TitleTextBlockStyle}" />
+        <TextBlock Text="ATK ZERO EX" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+      </StackPanel>
+      <StackPanel Spacing="12">
+        <Grid ColumnSpacing="12"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+          <StackPanel Spacing="4"><TextBlock x:Name="ConnectionText" Text="尚未连接" FontWeight="SemiBold"/><TextBlock x:Name="DeviceText" Text="连接后自动备份当前灯光设置" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" /></StackPanel>
+          <TextBlock x:Name="BatteryText" Grid.Column="1" VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+        </Grid>
+        <Grid ColumnSpacing="12"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+          <ComboBox x:Name="Transport" Header="连接方式" SelectedIndex="0" HorizontalAlignment="Stretch" AutomationProperties.Name="连接方式"><ComboBoxItem Content="2.4G 无线接收器"/><ComboBoxItem Content="USB 有线"/></ComboBox>
+          <Button x:Name="ConnectButton" Grid.Column="1" Content="连接鼠标" MinHeight="40" VerticalAlignment="Bottom" Click="Connect_Click" />
+        </Grid>
+      </StackPanel>
+      <StackPanel Spacing="12">
+        <TextBlock Text="选择颜色" Style="{ThemeResource SubtitleTextBlockStyle}" />
+        <GridView x:Name="Palette" SelectionMode="Single" IsItemClickEnabled="False" SelectionChanged="Palette_SelectionChanged" HorizontalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" AutomationProperties.Name="七种已验证的颜色">
+          <GridView.ItemsPanel><ItemsPanelTemplate><ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4" ItemWidth="148" ItemHeight="100"/></ItemsPanelTemplate></GridView.ItemsPanel>
+          <GridView.ItemTemplate><DataTemplate x:DataType="local:ColorChoice"><StackPanel Spacing="8" Width="116" Padding="10,8"><Border Height="36" CornerRadius="5" Background="{x:Bind Brush}" BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}" BorderThickness="1"/><TextBlock Text="{x:Bind Name}" HorizontalAlignment="Center" /></StackPanel></DataTemplate></GridView.ItemTemplate>
+        </GridView>
+        <TextBlock x:Name="SelectionText" Text="先选择颜色，再应用到鼠标" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+        <StackPanel Orientation="Horizontal" Spacing="12">
+          <Button x:Name="ApplyButton" Content="应用颜色" Style="{ThemeResource AccentButtonStyle}" MinWidth="166" MinHeight="44" IsEnabled="False" Click="Apply_Click" />
+          <Button x:Name="RestoreButton" Content="恢复原设置" MinWidth="166" MinHeight="44" IsEnabled="False" Click="Restore_Click" />
+        </StackPanel>
+      </StackPanel>
+      <InfoBar x:Name="Status" IsOpen="True" IsClosable="False" Severity="Informational" Title="连接前" Message="请先退出 ATK HUB。无线模式下，移动鼠标唤醒后再连接。" />
+      <StackPanel Spacing="8">
+        <CheckBox x:Name="RestoreOnExit" Content="退出时恢复连接前的灯光设置" IsChecked="False" Checked="ExitPreference_Changed" Unchecked="ExitPreference_Changed" />
+        <TextBlock x:Name="ExitBehaviorDescription" TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12" />
+        <TextBlock Text="空闲时不查询或保活，沿用鼠标原有休眠设置。休眠后需先移动唤醒，再应用或恢复。电量仅在连接时读取。" TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12" />
+        <TextBlock Text="充电提示可能覆盖有线模式的灯色，建议用 2.4G 模式观察颜色。" TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12" />
+        <HyperlinkButton Content="查看配置备份" HorizontalAlignment="Left" Padding="0,6" Click="Backup_Click" />
+      </StackPanel>
+          </StackPanel>
+        </ScrollViewer>
+      </TabViewItem>
+      <TabViewItem Header="自定义" IsClosable="False">
+        <Grid>
+          <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+        <ScrollViewer x:Name="CustomScroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+          <StackPanel x:Name="CustomContent" Padding="28,24,28,28" Spacing="20">
+            <StackPanel Spacing="6">
+            <TextBlock Text="自定义" Style="{ThemeResource TitleTextBlockStyle}" />
+            <TextBlock Text="拖入颜色，按你的顺序循环渐变。" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+            </StackPanel>
+            <Grid ColumnSpacing="12"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+              <TextBlock x:Name="CustomConnectionText" Text="尚未连接 · 与灯光控制共用连接" TextWrapping="Wrap" VerticalAlignment="Center" />
+              <Button x:Name="CustomConnectButton" Grid.Column="1" Content="连接鼠标" Click="Connect_Click" MinHeight="40" />
+            </Grid>
+            <StackPanel x:Name="SequenceEditor" Spacing="16">
+              <StackPanel Spacing="8">
+                <TextBlock Text="颜色库" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                <GridView x:Name="SourcePalette" SelectionMode="Single" CanDragItems="True" DragItemsStarting="Source_DragItemsStarting" SelectionChanged="Source_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" AutomationProperties.Name="可拖入序列的颜色">
+                  <GridView.ItemsPanel><ItemsPanelTemplate><ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="7" ItemWidth="82" ItemHeight="70"/></ItemsPanelTemplate></GridView.ItemsPanel>
+                  <GridView.ItemTemplate><DataTemplate x:DataType="local:ColorChoice"><StackPanel Width="62" Padding="6" Spacing="6"><Border Height="22" CornerRadius="4" Background="{x:Bind Brush}" BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}" BorderThickness="1"/><TextBlock Text="{x:Bind Name}" HorizontalAlignment="Center"/></StackPanel></DataTemplate></GridView.ItemTemplate>
+                </GridView>
+                <Button x:Name="AddStepButton" Content="添加所选颜色" Click="AddStep_Click" />
+              </StackPanel>
+              <StackPanel Spacing="8">
+                <TextBlock Text="播放序列" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                <TextBlock x:Name="SequenceSummary" Text="拖入第一个颜色，也可以点“添加所选颜色”。" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+                <Border BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="6" Background="{ThemeResource ControlFillColorDefaultBrush}" AllowDrop="True" DragOver="Sequence_DragOver" Drop="Sequence_Drop">
+                  <Grid>
+                    <ListView x:Name="SequenceList" MinHeight="112" MaxHeight="220" SelectionMode="Single" CanDragItems="True" CanReorderItems="True" AllowDrop="True" IsSwipeEnabled="False" DragOver="Sequence_DragOver" Drop="Sequence_Drop" SelectionChanged="Sequence_SelectionChanged" AutomationProperties.Name="播放序列，可拖动排序">
+                      <ListView.ItemTemplate><DataTemplate x:DataType="local:LightStep">
+                        <Grid ColumnSpacing="12" Padding="4,6"><Grid.ColumnDefinitions><ColumnDefinition Width="28"/><ColumnDefinition Width="32"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                          <TextBlock Text="{x:Bind Order,Mode=OneWay}" VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                          <Border x:Name="StepSwatch" Grid.Column="1" Width="32" Height="32" CornerRadius="4" Background="{x:Bind Hex}" BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}" BorderThickness="1" />
+                          <StackPanel Grid.Column="2" Spacing="2"><TextBlock Text="{x:Bind Name}"/><TextBlock Text="{x:Bind TimeSummary,Mode=OneWay}" FontSize="12" TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/></StackPanel>
+                        </Grid>
+                      </DataTemplate></ListView.ItemTemplate>
+                    </ListView>
+                    <TextBlock x:Name="SequenceEmpty" Text="将颜色拖到这里" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" IsHitTestVisible="False" />
+                  </Grid>
+                </Border>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <Button x:Name="MoveUpButton" Content="上移" Click="MoveUp_Click"/>
+                  <Button x:Name="MoveDownButton" Content="下移" Click="MoveDown_Click"/>
+                  <Button x:Name="RemoveStepButton" Content="移除" Click="RemoveStep_Click"/>
+                  <Button x:Name="ClearStepsButton" Content="清空" Click="ClearSteps_Click"/>
+                </StackPanel>
+                <Grid x:Name="TimingEditor" ColumnSpacing="12"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                  <NumberBox x:Name="HoldTime" Header="停留（秒）" Minimum="0" Maximum="30" SmallChange="0.5" SpinButtonPlacementMode="Compact" ValueChanged="Timing_ValueChanged" AutomationProperties.Name="所选颜色停留秒数"/>
+                  <NumberBox x:Name="FadeTime" Grid.Column="1" Header="渐变到下一色（秒）" Minimum="0" Maximum="30" SmallChange="0.5" SpinButtonPlacementMode="Compact" ValueChanged="Timing_ValueChanged" AutomationProperties.Name="所选颜色过渡到下一色的秒数"/>
+                </Grid>
+                <TextBlock x:Name="DraftState" Text="编排将自动保存在电脑上" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+              </StackPanel>
+            </StackPanel>
+            <TextBlock Text="播放到鼠标时，请用 2.4G 连接并退出 ATK HUB。静置约 2 秒后暂停发色，鼠标按原设置休眠熄灯；再次活动时继续播放。" FontSize="12" TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+          </StackPanel>
+        </ScrollViewer>
+            <Border Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}" Padding="28,12,28,20" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <StackPanel Spacing="10">
+              <InfoBar x:Name="CustomStatus" IsOpen="False" IsClosable="True" Severity="Informational" />
+              <Grid ColumnSpacing="12"><Grid.ColumnDefinitions><ColumnDefinition Width="44"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                <Border x:Name="PlaybackSwatch" Width="44" Height="44" CornerRadius="5" Background="{ThemeResource ControlFillColorDefaultBrush}" BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}" BorderThickness="1" />
+                <StackPanel Grid.Column="1" Spacing="4"><TextBlock x:Name="PlaybackText" Text="等待编排" FontWeight="SemiBold"/><TextBlock x:Name="PlaybackDetail" Text="可先进行界面预览" TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12"/></StackPanel>
+              </Grid>
+              <Grid ColumnSpacing="12" RowSpacing="8"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                <Button x:Name="StartSequenceButton" Content="开始播放" HorizontalAlignment="Stretch" MinHeight="44" Style="{ThemeResource AccentButtonStyle}" Click="StartSequence_Click"/>
+                <Button x:Name="PreviewSequenceButton" Grid.Column="1" Content="界面预览" HorizontalAlignment="Stretch" MinHeight="44" Click="PreviewSequence_Click"/>
+                <Button x:Name="PauseSequenceButton" Grid.Row="1" Content="暂停" HorizontalAlignment="Stretch" MinHeight="40" Click="PauseSequence_Click"/>
+                <Button x:Name="StopSequenceButton" Grid.Row="1" Grid.Column="1" Content="停止并恢复" HorizontalAlignment="Stretch" MinHeight="40" Click="StopSequence_Click"/>
+              </Grid>
+              <TextBlock x:Name="CustomExitBehaviorHint" TextWrapping="Wrap" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+            </StackPanel>
+            </Border>
+        </Grid>
+      </TabViewItem>
+    </TabView>
+  </Grid>
+</Window>

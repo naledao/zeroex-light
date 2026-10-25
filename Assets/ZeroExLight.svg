@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="ZERO EX mouse light">
+  <defs>
+    <linearGradient id="light" x1="48" y1="40" x2="208" y2="224" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00E5E5"/>
+      <stop offset=".48" stop-color="#3985FF"/>
+      <stop offset="1" stop-color="#D84BEB"/>
+    </linearGradient>
+  </defs>
+  <path d="M128 16C74 16 40 52 40 106v44c0 57 34 90 88 90s88-33 88-90v-44c0-54-34-90-88-90Z" fill="url(#light)"/>
+  <path d="M128 30c-46 0-74 29-74 76v44c0 49 28 76 74 76s74-27 74-76v-44c0-47-28-76-74-76Z" fill="#171B24"/>
+  <path d="M128 33v68M57 111h142" fill="none" stroke="#495363" stroke-width="4" stroke-linecap="round"/>
+  <rect x="116" y="53" width="24" height="43" rx="12" fill="#F7FAFF"/>
+</svg>

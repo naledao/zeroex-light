@@ -1,0 +1,603 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-25T12:42:05.713959+00:00",
+  "title": "Design System: ZERO EX · 灯光控制",
+  "extensions": {
+    "platform": {
+      "target": "Windows 11 native desktop",
+      "framework": "C# / WinUI 3",
+      "visualAuthority": "Native Windows 11 Fluent, explicitly selected by the user",
+      "units": "Source dimensions are WinUI DIP. Frontmatter px preserves their numeric value. Screenshot pixels depend on scaling.",
+      "themeBehavior": "OS light/dark theme; no RequestedTheme override; XamlControlsResources merged in App.xaml.",
+      "sourceOfTruth": [
+        "MainWindow.xaml",
+        "MainWindow.xaml.cs",
+        "MainWindow.Custom.cs",
+        "App.xaml"
+      ],
+      "previewPolicy": "HTML/CSS entries are self-contained system-color reference projections for the design panel. They do not reproduce WinUI templates, certify accessibility, or replace the native resource bindings below."
+    },
+    "nativeThemeResources": {
+      "pageBackground": {
+        "key": "ApplicationPageBackgroundThemeBrush",
+        "use": "Root content background"
+      },
+      "secondaryText": {
+        "key": "TextFillColorSecondaryBrush",
+        "use": "Metadata, battery-at-connection, selection details, guidance"
+      },
+      "swatchStroke": {
+        "key": "ControlStrokeColorDefaultBrush",
+        "use": "One-DIP swatch/sequence outlines and footer separator"
+      },
+      "primaryAction": {
+        "key": "AccentButtonStyle",
+        "use": "Static Apply and custom Start buttons"
+      },
+      "otherControls": {
+        "key": "XamlControlsResources",
+        "use": "Native TabView, buttons, ComboBox, GridView/ListView, NumberBox, CheckBox, HyperlinkButton, InfoBar, ContentDialog, selection, focus, hover, pressed and disabled states"
+      },
+      "controlFill": {
+        "key": "ControlFillColorDefaultBrush",
+        "use": "Sequence container and initial playback preview fill"
+      }
+    },
+    "nativeTypography": {
+      "title": {
+        "resource": "TitleTextBlockStyle",
+        "use": "鼠标灯光 and 自定义"
+      },
+      "subtitle": {
+        "resource": "SubtitleTextBlockStyle",
+        "use": "选择颜色, 颜色库 and 播放序列"
+      },
+      "body": {
+        "resource": "BodyTextBlockStyle",
+        "use": "ATK ZERO EX"
+      },
+      "default": {
+        "resource": "Inherited WinUI system font and language fallback",
+        "use": "Controls and other labels"
+      },
+      "policy": "Do not freeze resolved native font family, role size, line height, or language fallback. Only explicit source overrides appear in frontmatter."
+    },
+    "typographyMeta": {
+      "connection-status": {
+        "displayName": "Connection status",
+        "purpose": "Explicit semibold connection state label"
+      },
+      "guidance": {
+        "displayName": "Operational guidance",
+        "purpose": "Operational notes, row timing summaries, draft-save state and playback detail"
+      }
+    },
+    "colorMeta": {
+      "device-cyan": {
+        "displayName": "青色 / Cyan",
+        "purpose": "Exact physical LED choice"
+      },
+      "device-red": {
+        "displayName": "红色 / Red",
+        "purpose": "Exact physical LED choice"
+      },
+      "device-green": {
+        "displayName": "绿色 / Green",
+        "purpose": "Exact physical LED choice"
+      },
+      "device-blue": {
+        "displayName": "蓝色 / Blue",
+        "purpose": "Exact physical LED choice"
+      },
+      "device-magenta": {
+        "displayName": "紫色 / Magenta",
+        "purpose": "Exact physical LED choice; retain the user-facing label 紫色"
+      },
+      "device-yellow": {
+        "displayName": "黄色 / Yellow",
+        "purpose": "Exact physical LED choice"
+      },
+      "device-white": {
+        "displayName": "白色 / White",
+        "purpose": "Exact physical LED choice; outline remains visible"
+      }
+    },
+    "tonalRampPolicy": "No synthetic brand ramps. Preserve the seven exact selectable endpoints; explicit custom playback and offline preview interpolate intermediate RGB values. Native UI theme colors remain resource references.",
+    "elevation": {
+      "customShadows": false,
+      "strategy": "Flat native page surface; borders and standard control states provide structure; native window and dialog templates own their depth."
+    },
+    "motion": [],
+    "motionPolicy": "No decorative UI animation tokens. Explicit custom light loops and offline preview are functional. A 50-ms playing/200-ms paused UI timer is separate from hardware sends spaced at least 450 ms apart; activity gating freezes the hardware timeline and stops automatic HID commands after about two seconds idle.",
+    "breakpoints": [],
+    "windowConstraints": {
+      "unit": "DIP unless noted",
+      "initialOuterWidth": 760,
+      "initialOuterHeight": 830,
+      "minimumOuterWidth": 460,
+      "minimumOuterHeight": 460,
+      "minimumImplementation": "OverlappedPresenter.PreferredMinimumWidth / PreferredMinimumHeight multiplied by current DPI scale; refreshed on XamlRoot.Changed",
+      "initialWorkingAreaAllowance": {
+        "value": 60,
+        "unit": "physical pixels"
+      },
+      "scrolling": {
+        "vertical": "Auto",
+        "horizontal": "Disabled",
+        "owner": "Lighting tab ScrollViewer and custom editor CustomScroll; custom footer is outside the scroll region"
+      },
+      "responsiveBehavior": "Both tab headers fill half the available strip. Lighting ItemsWrapGrid fits at most four columns; compact source palette fits at most seven and wraps independently. Custom editor scrolls above a pinned footer. No authored breakpoint."
+    },
+    "componentGeometry": {
+      "applyAndRestore": {
+        "minWidth": 166,
+        "minHeight": 44,
+        "rowSpacingToken": "spacing.group-internal"
+      },
+      "connect": {
+        "minHeight": 40,
+        "alignment": "Bottom"
+      },
+      "paletteCell": {
+        "width": 148,
+        "height": 100,
+        "maximumRowsOrColumns": 4,
+        "orientation": "Horizontal"
+      },
+      "swatch": {
+        "strokeThickness": 1,
+        "strokeResource": "ControlStrokeColorDefaultBrush"
+      },
+      "connectionGrids": {
+        "columns": [
+          "*",
+          "Auto"
+        ],
+        "columnSpacingToken": "spacing.group-internal"
+      },
+      "compactPalette": {
+        "cellWidth": 82,
+        "cellHeight": 70,
+        "maximumColumns": 7,
+        "contentWidth": 62,
+        "contentPadding": 6,
+        "contentSpacing": 6,
+        "swatchHeight": 22,
+        "swatchRadiusToken": "rounded.compact-swatch"
+      },
+      "sequenceList": {
+        "minHeight": 112,
+        "maxHeight": 220,
+        "containerRadiusToken": "rounded.sequence",
+        "rowPadding": [
+          4,
+          6
+        ],
+        "rowColumnWidths": [
+          28,
+          32,
+          "*"
+        ],
+        "rowColumnSpacing": 12,
+        "swatchSize": 32,
+        "swatchRadiusToken": "rounded.compact-swatch"
+      },
+      "customEditor": {
+        "contentPadding": [
+          28,
+          24,
+          28,
+          28
+        ],
+        "sectionSpacing": 20,
+        "sequenceEditorSpacing": 16,
+        "detailSpacing": 2
+      },
+      "playbackFooter": {
+        "pinned": true,
+        "layout": "Grid row Auto below flexible scrolling editor row",
+        "paddingLTRB": [
+          28,
+          12,
+          28,
+          20
+        ],
+        "topBorder": 1,
+        "stackSpacing": 10,
+        "previewSize": 44,
+        "previewRadiusToken": "rounded.swatch",
+        "actionColumns": [
+          "*",
+          "*"
+        ],
+        "actionColumnSpacing": 12,
+        "actionRowSpacing": 8,
+        "firstRowMinHeight": 44,
+        "secondRowMinHeight": 40
+      }
+    },
+    "nativeStateSemantics": {
+      "initial": "Lighting tab selected; wireless and first color selected; Apply/Restore disabled; restore-on-exit unchecked; normal exit retains the last applied color. Custom loads local draft or starts empty and never auto-starts playback.",
+      "busy": "Competing operations and sequence editing disabled; close cancelled until operation finishes.",
+      "applyEnabled": "connected && !busy && !Playing && selected ColorChoice",
+      "restoreEnabled": "session.Dirty && !busy",
+      "transportEnabled": "!busy && !session.Dirty && !Playing",
+      "selection": "Static palette selection is preview only until Apply. Sequence edits and offline preview perform no HID access.",
+      "status": "Lighting Status remains open and nonclosable. CustomStatus starts closed, is closable, and mirrors operation status in the pinned footer. Severity and native glyphs retain text semantics; started playback is not measured telemetry.",
+      "failedExitRestoration": "Explicit restoration opt-in only: native ContentDialog; Close/Default=返回恢复; Primary=保留当前设置退出.",
+      "connectEnabled": "!busy && !Playing",
+      "normalExit": "Stop and await playback, then retain last applied color by default. RetainCurrentOnExit saves a local marker only; it adds no restore/off HID command. A host-driven loop cannot continue after exit.",
+      "failedExitRecord": "Local retention record save failure: native ContentDialog; Close/Default=返回; Primary=保留当前设置退出."
+    },
+    "accessibility": {
+      "transportName": "连接方式",
+      "paletteName": "七种已验证的颜色",
+      "paletteSemantics": "Native single-selection GridView, visible color-name text and ColorChoice.ToString() returning Name; selected name/hex repeated below.",
+      "controls": "Native labels, focus, selection, keyboard interaction, disabled states and severity semantics retained.",
+      "wrapping": [
+        "DeviceText",
+        "operational guidance",
+        "native InfoBar message"
+      ],
+      "verificationLimits": "Saved reports cover native controls and DataPackage insertion, not live drag pointer gestures. Dark/high-contrast themes, keyboard focus traversal and screen-reader output remain unexercised; native inheritance is not a test result.",
+      "sourcePaletteName": "可拖入序列的颜色",
+      "sequenceName": "播放序列，可拖动排序",
+      "holdTimeName": "所选颜色停留秒数",
+      "fadeTimeName": "所选颜色过渡到下一色的秒数",
+      "alternatives": "Add Selected Color and Up/Down buttons supplement native drag/drop and reorder."
+    },
+    "evidence": {
+      "captures": [
+        ".impeccable/review/custom-empty.png",
+        ".impeccable/review/custom-editor.png",
+        ".impeccable/review/custom-editor-narrow.png",
+        ".impeccable/review/custom-editor-bottom.png",
+        ".impeccable/review/tabs-lighting.png"
+      ],
+      "captureState": "Bottom capture is intentionally scrolled; other captures show page tops. Diagnostic populated drafts do not auto-populate ordinary launch.",
+      "finishVerdict": ".impeccable/review/custom-final-review.md",
+      "reviewDisposition": "ship; no material fixes; full-strip half-width tabs confirmed across all five captures",
+      "supersededReview": ".impeccable/review/custom-finish-review.md predates the final tab-width correction",
+      "logicReport": {
+        "path": ".impeccable/review/custom-self-test.json",
+        "passes": 25
+      },
+      "uiReport": {
+        "path": ".impeccable/review/custom-ui-test.json",
+        "passes": 11,
+        "hardwareConnected": false,
+        "hardwareModified": false
+      },
+      "deviceReport": {
+        "path": ".impeccable/review/custom-device-idle-test.json",
+        "success": true,
+        "verifiedFrames": 60,
+        "idleSilentForAtLeast3Seconds": true,
+        "original96BytesRestored": true,
+        "pendingRecovery": false
+      },
+      "ownerObservation": "User confirmed visible native-device loop",
+      "sleepAcceptanceScope": "Prior physical sleep-off evidence is limited to tested wireless firmware 3.01. Configuration read-back, visual review and command silence do not independently prove LED extinction on every state/current binary."
+    },
+    "tabNavigation": {
+      "control": "Pages / native TabView",
+      "automationName": "功能页签",
+      "headers": [
+        "灯光控制",
+        "自定义"
+      ],
+      "defaultIndex": 0,
+      "tabWidthMode": "Equal",
+      "availableStripSharePerTab": 0.5,
+      "marginDip": [
+        12,
+        12,
+        12,
+        0
+      ],
+      "canAdd": false,
+      "canClose": false,
+      "canDrag": false,
+      "canReorder": false,
+      "resourceOverride": {
+        "key": "TabViewItemMaxWidth",
+        "value": 10000,
+        "location": "App.xaml",
+        "purpose": "Remove the native per-tab width cap so both fixed tabs fill the available strip equally; the large ceiling is not a target tab width."
+      },
+      "switchBehavior": "Retains controls/session/player state and issues no device operation itself."
+    },
+    "customSequence": {
+      "maxSteps": 32,
+      "repeatedColors": "Allowed with independent step identities",
+      "holdSeconds": {
+        "min": 0,
+        "max": 30,
+        "default": 1,
+        "smallChange": 0.5
+      },
+      "fadeToNextSeconds": {
+        "min": 0,
+        "max": 30,
+        "default": 3,
+        "smallChange": 0.5
+      },
+      "minimumLoopSeconds": 0.45,
+      "loop": "Last-to-first RGB interpolation included",
+      "entry": "Copy color by native drag/drop or Add Selected Color",
+      "ordering": "Native ListView reorder plus explicit Up/Down buttons; Remove/Clear available",
+      "persistence": "Local Presets/custom-sequence.json under AppContext.BaseDirectory; autosave editing and load on ordinary launch",
+      "editEnabled": "!busy && !Playing",
+      "preview": "Valid offline loop, no hardware access",
+      "start": "Valid loop, idle controller and shared wireless connection required",
+      "pause": "Manual pause/resume freezes/preserves timeline position",
+      "stop": "Preview stops without hardware change; hardware playback stops and restores original settings",
+      "previewTruth": "Sequence sample, index/next-index and RGB hex; read-back is configuration verification, not optical telemetry."
+    },
+    "activityGate": {
+      "source": "Passive Windows Raw Input filtered to this mouse actual movement/button activity",
+      "idleThresholdSeconds": 2,
+      "minimumHardwareIntervalMilliseconds": 450,
+      "idleBehavior": "Freeze timeline and stop all automatic HID commands",
+      "resumeBehavior": "Physical activity resumes from frozen position",
+      "uiTickMilliseconds": {
+        "playing": 50,
+        "paused": 200
+      },
+      "constraints": [
+        "No HID polling",
+        "No keepalive",
+        "No background battery polling",
+        "No automatic reconnect",
+        "No playback on launch",
+        "Preserve firmware sleep settings"
+      ],
+      "hardwareChannel": "Verified configuration-write channel; dedicated volatile animation channel and long-duration endurance are not established."
+    },
+    "applicationIcon": {
+      "introducedIn": "0.2.1",
+      "scope": "Original application identity asset only: executable, native window/titlebar and taskbar role. No general interface palette, type, layout or control styling change.",
+      "source": "Assets/ZeroExLight.svg",
+      "master": {
+        "path": "Assets/ZeroExLight.png",
+        "width": 512,
+        "height": 512,
+        "transparent": true
+      },
+      "ico": {
+        "path": "Assets/ZeroExLight.ico",
+        "sizes": [
+          16,
+          20,
+          24,
+          32,
+          40,
+          48,
+          64,
+          128,
+          256
+        ],
+        "transparent": true
+      },
+      "renderer": "tools/create_icon.py",
+      "provenance": "Assets/ZeroExLight.provenance.json",
+      "externalArtwork": false,
+      "geometry": "Original upright geometric mouse silhouette, continuous colored perimeter, dark body, split-button lines and white wheel; no lettering or decorative glow.",
+      "assetLocalColors": {
+        "contourCyan": "#00E5E5",
+        "contourBlue": "#3985FF",
+        "contourMagenta": "#D84BEB",
+        "body": "#171B24",
+        "wheel": "#F7FAFF",
+        "buttonStroke": "#495363"
+      },
+      "contour": "Linear cyan-blue-magenta gradient, blue stop at 0.48; confined to the icon asset.",
+      "paletteBoundary": "Asset-local colors are not general UI tokens and do not replace native WinUI theme resources or the seven selectable device endpoints.",
+      "integration": {
+        "executable": "ZeroExLight.csproj ApplicationIcon=Assets/ZeroExLight.ico",
+        "deployment": "Content copies ICO to output and publish using PreserveNewest",
+        "window": "MainWindow.xaml.cs AppWindow.SetIcon with Assets/ZeroExLight.ico under AppContext.BaseDirectory"
+      },
+      "evidence": {
+        "sizeSheet": ".impeccable/review/icon-sizes.png",
+        "sizeSheetSamples": [
+          16,
+          20,
+          24,
+          32,
+          40,
+          48,
+          64
+        ],
+        "sizeSheetGrounds": [
+          "light",
+          "dark"
+        ],
+        "nativeWindowCapture": ".impeccable/review/icon-native-window.png",
+        "nativeWindowCapturePixels": [
+          1520,
+          1660
+        ],
+        "nativeCheck": ".impeccable/review/icon-native-check.json",
+        "executableIconPresent": true,
+        "windowSmallIconPixels": [
+          64,
+          64
+        ],
+        "windowLargeIconPixels": [
+          64,
+          64
+        ],
+        "hardwareAccess": false,
+        "finishReview": ".impeccable/review/icon-finish-review.md",
+        "disposition": "ship; no material fixes",
+        "limits": "Native titlebar and icon resource checks were supplied; a separate taskbar capture was not supplied. Icon review does not reverify hardware behavior or broader UI accessibility/theme paths."
+      }
+    },
+    "exitPolicy": {
+      "introducedIn": "0.2.2",
+      "restoreOnExitDefault": false,
+      "normalExit": "Retain last applied static color after stopping and awaiting host playback; save intentional retention locally without a restore/off command.",
+      "optInRestore": "Explicitly checking restore-on-exit restores the original configuration on close; an originally disabled light may extinguish.",
+      "manualActions": "Manual Restore and explicit hardware Stop/Restore retain restoration behavior; closing the application is a separate choice.",
+      "sleepConstraint": "Original firmware sleep-off behavior remains mandatory; no sleep parameter change, keepalive or polling is introduced.",
+      "guidance": {
+        "lightingControl": "ExitBehaviorDescription",
+        "customFooterControl": "CustomExitBehaviorHint",
+        "updatesFrom": "Actual RestoreOnExit checkbox state",
+        "defaultLighting": "默认退出保留最后设置的颜色，循环渐变随软件退出而停止。",
+        "restoreLighting": "退出时恢复原灯光配置，原配置关闭时灯会熄灭。",
+        "defaultCustom": "退出保留最后颜色。静置后仍按原设置休眠熄灯。",
+        "restoreCustom": "退出将恢复原灯光。静置后仍按原设置休眠熄灯。"
+      },
+      "recovery": "RetainedOnExit preserves the original snapshot, backup file and modified-address list; next connection distinguishes intentional retention from interruption. New write or manual restore clears the marker before mutation.",
+      "evidence": {
+        "review": ".impeccable/review/exit-policy-review.md",
+        "disposition": "ship; no material fixes",
+        "captures": [
+          ".impeccable/review/exit-default-wide.png",
+          ".impeccable/review/exit-default-narrow.png",
+          ".impeccable/review/exit-restore-opt-in.png",
+          ".impeccable/review/exit-custom.png"
+        ],
+        "captureScope": "Default wide/narrow images are scrolled settings viewports, not full-page or document-bottom captures; opt-in shows checked state and custom shows pinned guidance.",
+        "nativeCloseReport": ".impeccable/review/retained-exit-device.json",
+        "commandsBeforeClose": 60,
+        "commandsAfterCloseHandler": 60,
+        "retainedRecord": true,
+        "postExitProbe": ".impeccable/review/retained-exit-probe.json",
+        "retained96BytesMatchExactly": true,
+        "ownerObservation": "Cyan remained after app exit and during normal mouse movement.",
+        "customUiReport": ".impeccable/review/exit-custom-ui.json",
+        "customUiPasses": 11,
+        "hardwareConnectedDuringUiChecks": false,
+        "hardwareModifiedDuringUiChecks": false,
+        "limits": "Retention evidence does not independently expand prior firmware sleep-off acceptance. Dark/high-contrast themes, keyboard traversal and screen-reader output were not reverified by this documentation update."
+      }
+    }
+  },
+  "components": [
+    {
+      "name": "Apply color",
+      "kind": "button",
+      "description": "Native AccentButtonStyle static action; disabled until connected and idle with no running playback.",
+      "html": "<button class=\"ds-action ds-apply\">应用颜色</button>",
+      "css": ".ds-action { min-width:166px; min-height:44px; font-family:system-ui; } .ds-action:hover { outline:1px solid GrayText; } .ds-action:focus-visible { outline:2px solid Highlight; outline-offset:2px; } .ds-action:active { outline:2px solid ButtonText; } .ds-action:disabled { color:GrayText; outline:none; } .ds-apply { background:Highlight; color:HighlightText; }"
+    },
+    {
+      "name": "Restore original settings",
+      "kind": "button",
+      "description": "Ordinary native Button, available only for an idle dirty session; browser native styling in this reference projection.",
+      "html": "<button class=\"ds-action ds-restore\">恢复原设置</button>",
+      "css": ".ds-action { min-width:166px; min-height:44px; font-family:system-ui; } .ds-action:hover { outline:1px solid GrayText; } .ds-action:focus-visible { outline:2px solid Highlight; outline-offset:2px; } .ds-action:active { outline:2px solid ButtonText; } .ds-action:disabled { color:GrayText; outline:none; } .ds-restore { background:ButtonFace; color:ButtonText; }"
+    },
+    {
+      "name": "Connection transport",
+      "kind": "input",
+      "description": "Native ComboBox with explicit header and accessible name; native browser select is a panel-only projection.",
+      "html": "<label class=\"ds-transport\">连接方式<select aria-label=\"连接方式\"><option>2.4G 无线接收器</option><option>USB 有线</option></select></label>",
+      "css": ".ds-transport { display:grid; gap:8px; font-family:system-ui; color:CanvasText; } .ds-transport select { background:Field; color:FieldText; } .ds-transport select:hover { outline:1px solid GrayText; } .ds-transport select:focus-visible { outline:2px solid Highlight; outline-offset:2px; } .ds-transport select:active { outline:1px solid Highlight; } .ds-transport select:disabled { color:GrayText; }"
+    },
+    {
+      "name": "Named color choice",
+      "kind": "custom",
+      "refersTo": "palette-item",
+      "description": "One exact cyan preview with visible name; native GridView owns actual selection and keyboard behavior.",
+      "html": "<button class=\"ds-color-choice\" aria-label=\"青色\" aria-pressed=\"true\"><span class=\"ds-color-swatch\"></span><span>青色</span></button>",
+      "css": ".ds-color-choice { display:grid; gap:8px; width:116px; padding:8px 10px; color:CanvasText; font-family:system-ui; background:Canvas; } .ds-color-swatch { display:block; height:36px; border-radius:5px; border:1px solid GrayText; background:#00FFFF; } .ds-color-choice[aria-pressed=\"true\"] { outline:2px solid Highlight; } .ds-color-choice:hover { outline:1px solid Highlight; } .ds-color-choice:focus-visible { outline:2px solid Highlight; outline-offset:2px; } .ds-color-choice:active { outline:2px solid ButtonText; }"
+    },
+    {
+      "name": "Operation status",
+      "kind": "custom",
+      "description": "Native nonclosable InfoBar in informational state; system-color panel projection keeps an icon, title and readable message without fixing native severity colors.",
+      "html": "<div class=\"ds-status\" role=\"status\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M12 10v7m0-10v1\" stroke=\"currentColor\" stroke-width=\"2\"/></svg><div><strong>连接前</strong><p>请先退出 ATK HUB。无线模式下，移动鼠标唤醒后再连接。</p></div></div>",
+      "css": ".ds-status { display:flex; gap:12px; color:CanvasText; background:Canvas; border:1px solid GrayText; font-family:system-ui; } .ds-status svg { flex-shrink:0; } .ds-status p { margin:4px 0 0; }"
+    },
+    {
+      "name": "Restore on exit",
+      "kind": "input",
+      "description": "Native unchecked-by-default CheckBox: default exit retains the last color; checking explicitly opts into restoration. Browser checkbox is a reference projection.",
+      "html": "<label class=\"ds-restore-exit\"><input type=\"checkbox\">退出时恢复连接前的灯光设置</label>",
+      "css": ".ds-restore-exit { display:flex; align-items:center; gap:8px; color:CanvasText; font-family:system-ui; } .ds-restore-exit input { accent-color:Highlight; } .ds-restore-exit input:hover { outline:1px solid GrayText; } .ds-restore-exit input:focus-visible { outline:2px solid Highlight; outline-offset:2px; } .ds-restore-exit input:active { outline:1px solid Highlight; }"
+    },
+    {
+      "name": "View backup folder",
+      "kind": "button",
+      "refersTo": "backup-link",
+      "description": "Native HyperlinkButton opens the configuration backup directory; this panel-only button performs no file action.",
+      "html": "<button class=\"ds-backup-link\">查看配置备份</button>",
+      "css": ".ds-backup-link { padding:6px 0; background:transparent; color:LinkText; border:0; text-decoration:underline; font-family:system-ui; } .ds-backup-link:hover { text-decoration-thickness:2px; } .ds-backup-link:focus-visible { outline:2px solid Highlight; outline-offset:2px; } .ds-backup-link:active { color:ActiveText; }"
+    },
+    {
+      "name": "Fixed equal tabs",
+      "kind": "nav",
+      "description": "Two native WinUI tabs each fill half of the available strip; system-color panel projection only.",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\" aria-label=\"功能页签\"><button role=\"tab\" aria-selected=\"true\">灯光控制</button><button role=\"tab\" aria-selected=\"false\">自定义</button></div>",
+      "css": ".ds-tabs { display:flex; width:100%; color:CanvasText; font-family:system-ui; } .ds-tabs button { flex:1 1 50%; min-width:0; max-width:none; color:ButtonText; background:ButtonFace; } .ds-tabs button[aria-selected=\"true\"] { border-bottom:2px solid Highlight; } .ds-tabs button:hover { outline:1px solid GrayText; } .ds-tabs button:focus-visible { outline:2px solid Highlight; outline-offset:2px; } .ds-tabs button:active { outline:1px solid Highlight; }"
+    },
+    {
+      "name": "Selected sequence step",
+      "kind": "custom",
+      "refersTo": "sequence-container",
+      "description": "Order, exact endpoint swatch, name and timing summary; native ListView owns actual selection and reorder behavior.",
+      "html": "<div class=\"ds-sequence\" role=\"listbox\" aria-label=\"播放序列，可拖动排序\"><button class=\"ds-step\" role=\"option\" aria-selected=\"true\"><span>1</span><span class=\"ds-step-swatch\"></span><span>红色<small>停留 1 秒 · 渐变 3 秒</small></span></button></div>",
+      "css": ".ds-sequence { border:1px solid GrayText; border-radius:6px; color:CanvasText; background:Canvas; font-family:system-ui; } .ds-step { display:grid; grid-template-columns:28px 32px 1fr; align-items:center; gap:12px; padding:6px 4px; width:100%; color:ButtonText; background:ButtonFace; text-align:left; } .ds-step-swatch { width:32px; height:32px; border-radius:4px; border:1px solid GrayText; background:#FF0000; } .ds-step small { display:block; margin-top:2px; font-size:12px; } .ds-step[aria-selected=\"true\"] { outline:1px solid Highlight; } .ds-step:hover { outline:1px solid GrayText; } .ds-step:focus-visible { outline:2px solid Highlight; outline-offset:2px; } .ds-step:active { outline:1px solid Highlight; }"
+    },
+    {
+      "name": "Step timing",
+      "kind": "input",
+      "description": "Native bounded NumberBox pair; browser number fields are a panel-only projection with the same timing limits.",
+      "html": "<div class=\"ds-timing\"><label>停留（秒）<input aria-label=\"所选颜色停留秒数\" type=\"number\" min=\"0\" max=\"30\" step=\"0.5\" value=\"1\"></label><label>渐变到下一色（秒）<input aria-label=\"所选颜色过渡到下一色的秒数\" type=\"number\" min=\"0\" max=\"30\" step=\"0.5\" value=\"3\"></label></div>",
+      "css": ".ds-timing { display:grid; grid-template-columns:1fr 1fr; gap:12px; color:CanvasText; font-family:system-ui; } .ds-timing label { display:grid; gap:8px; min-width:0; } .ds-timing input { min-width:0; color:FieldText; background:Field; } .ds-timing input:hover { outline:1px solid GrayText; } .ds-timing input:focus-visible { outline:2px solid Highlight; outline-offset:2px; } .ds-timing input:active { outline:1px solid Highlight; } .ds-timing input:disabled { color:GrayText; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Native Windows 11 Fluent",
+    "overview": "The user chose C# and WinUI 3 for a focused operating utility. Windows supplies its visual authority: ordinary solid surfaces, native controls, the system accent, native keyboard feedback, and the operating system's light or dark theme. This captures the reviewed implementation and merges the provisional design notes; it does not establish a separate brand identity.\n\nUse a clear, moderately spaced control surface that helps the owner connect, apply a color or arrange a looping sequence, and restore the saved settings. Strong saturated color belongs inside device-color and playback previews. State text and native status components explain connection, verification, and recovery without simulated telemetry. Functional gradients belong to explicitly started light playback and its offline preview. Sleep behavior and recovery acceptance remain defined by PRODUCT.md.",
+    "keyCharacteristics": [
+      "Native WinUI controls and theme resources.",
+      "Seven named, exact device-output swatches.",
+      "Explicit Apply, playback, and Restore actions with visible operation status.",
+      "Equal full-strip tabs, scrolling editors, and a pinned custom-playback footer.",
+      "Readable Chinese labels and standard keyboard and accessibility semantics."
+    ],
+    "rules": [
+      {
+        "name": "Native Theme",
+        "body": "Preserve resource-based surfaces, text, accent, selection, and focus instead of copying sampled screenshot colors.",
+        "section": "colors"
+      },
+      {
+        "name": "Device Color",
+        "body": "Preserve the seven exact selectable endpoint colors. Intermediate colors are functional sequence interpolation and preview, not an application-brand tonal ramp or decorative UI gradient. The independently authored application icon is a scoped identity-asset exception described in Components; its contour colors do not become interface tokens.",
+        "section": "colors"
+      },
+      {
+        "name": "Equal Tabs",
+        "body": "Each of the two fixed headers occupies half of the available strip at every supported window width; equal sizing must not stop at the native per-tab width cap.",
+        "section": "layout"
+      },
+      {
+        "name": "Activity Gate",
+        "body": "Explicitly started hardware playback uses passive Raw Input for this mouse's actual movement/button activity. About two seconds without activity freezes sequence time and stops automatic HID commands; physical activity resumes it. Preserve firmware sleep settings, avoid HID polling and keepalive, and retain explicit Stop/Restore.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "**Do** inherit Windows themes, system accent, native focus states, and language fallback.",
+      "**Do** preserve all seven named swatches and the selected name/hex text.",
+      "**Do** keep Apply and Restore explicit, readable, and reachable at the minimum window size.",
+      "**Do** show actual connection, backup, verification, and recovery outcomes in text.",
+      "**Do** retain vertical scrolling and wrapping guidance when space is constrained.",
+      "**Do** keep both tab headers half-width and the custom playback/recovery controls pinned while its editor scrolls.",
+      "**Do** distinguish user-arranged light gradients and offline preview from decorative interface motion and measured device telemetry."
+    ],
+    "donts": [
+      "**Don't** turn device-output colors into general interface branding or replace native theme resources with sampled hex values; the original application icon is the sole scoped identity-asset exception.",
+      "**Don't** add decorative images or decorative gradients inside the interface, ornamental dashboard cards, or motion competing with the functional sequence preview; retain the original icon in its native application-identity role.",
+      "**Don't** present simulated battery, device details, or sleep verification as observed hardware state.",
+      "**Don't** add HID polling, keepalive, automatic playback on launch, or playback writes after the mouse activity gate closes.",
+      "**Don't** remove native labels, selection feedback, keyboard operation, or the visible recovery path."
+    ]
+  }
+}

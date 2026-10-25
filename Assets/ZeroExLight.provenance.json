@@ -1,0 +1,17 @@
+{
+  "source": "ZeroExLight.svg",
+  "method": "Original code-authored vector geometry, rasterized by tools/create_icon.py",
+  "purpose": "Application EXE, window/titlebar and taskbar icon",
+  "externalArtwork": false,
+  "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40,
+    48,
+    64,
+    128,
+    256
+  ]
+}

@@ -1,0 +1,34 @@
+# Build and publish output
+[Bb]in/
+[Oo]bj/
+publish/
+artifacts/
+TestResults/
+*.pdb
+*.zip
+
+# Per-device settings and local verification data
+Backups/
+Presets/
+Verification/
+crash.log
+*.log
+*.tmp
+
+# Editors and machine-local configuration
+.vs/
+.vscode/
+*.user
+*.suo
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+
+# Design context is shared; session evidence stays local
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/build/
+.impeccable/cache/
+.impeccable/config.local.json
